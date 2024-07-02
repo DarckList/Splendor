@@ -41,22 +41,7 @@ public class Game
 	{
 		while (!_boardContext.IsEnd)
 		{
-			Render();
-			Console.WriteLine("Player {} move");
-			Console.ReadLine();
-			Console.Clear();
+			
 		}
-	}
-
-
-	private void Render()
-	{
-		Console.WriteLine("Players:");
-		RenderPlayers();
-	}
-
-	private void RenderPlayers()
-	{
-		Helplers.RenderCollenction(_boardContext.Players, ConsoleColor.Green);
 	}
 }
