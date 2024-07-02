@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 
-namespace Core.Components;
+namespace Core.Components.Tokens;
 public class Token : IRendable
 {
-    
+
     public TokenType Type { get; private set; }
     public int Count { get; private set; }
 
@@ -13,19 +13,19 @@ public class Token : IRendable
     public Token(TokenType type, int ammount, ConsoleColor tokenColor)
     {
         Type = type;
-		Count = ammount;
+        Count = ammount;
         TokenColor = tokenColor;
-	}
+    }
 
     public void SpendTokens(int price)
     {
         Count -= price;
 
-	}
+    }
 
     public void IncreaseTokens(int ammount)
     {
-        if(ammount <=0)
+        if (ammount <= 0)
         {
             Console.WriteLine("ammount shoud be positiv value");
             return;
@@ -42,8 +42,8 @@ public class Token : IRendable
     }
 
 
-	private string RenderType()
-    {   
-		return Type.ToString();
-	}
+    private string RenderType()
+    {
+        return Type.ToString();
+    }
 }

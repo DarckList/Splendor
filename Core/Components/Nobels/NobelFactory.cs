@@ -1,4 +1,6 @@
-﻿namespace Core.Components.Nobels;
+﻿using Core.Components.Tokens;
+
+namespace Core.Components.Nobels;
 internal class NobelFactory : INobelFactory
 {
 	private readonly Random _random;
