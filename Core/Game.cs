@@ -8,17 +8,17 @@ public class Game
 {
 	private const int _minPlayers = 1;
 	private const int _maxPlayers = 4;
-	private readonly List<Player> _players;
-	private readonly Dictionary<DevelopmentCardlevel, Stack<DevelopmentCard>> _developmentCards;
 
-
-	private bool _isEnd;
+	private readonly BoardContext _boardContext;
 
 	public Game(IEnumerable<string> playerNames, IDevelopmentCardFactory developmentCardFactory)
 	{
-		_players = InitPlayers(playerNames.ToList());
-		_isEnd = false;
-		_developmentCards = developmentCardFactory.CreateCards();
+		_boardContext = new()
+		{
+			Players = InitPlayers(playerNames.ToList()),
+			IsEnd = false,
+			DevelopmentCards = developmentCardFactory.CreateCards(),
+		};
 	}
 	
 	private List<Player> InitPlayers(List<string> playerNames)
@@ -32,7 +32,7 @@ public class Game
 
 	public void Run()
 	{
-		while (!_isEnd)
+		while (!_boardContext.IsEnd)
 		{
 			Render();
 			Console.WriteLine("Player {} move");
@@ -50,6 +50,6 @@ public class Game
 
 	private void RenderPlayers()
 	{
-		Helplers.RenderCollenction(_players, ConsoleColor.Green);
+		Helplers.RenderCollenction(_boardContext.Players, ConsoleColor.Green);
 	}
 }
