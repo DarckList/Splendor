@@ -1,6 +1,4 @@
-﻿using System.Text;
-using Core.Components;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Core.Components.Nobels;
 
 namespace Core;
 
@@ -11,23 +9,30 @@ public class Game
 
 	private readonly BoardContext _boardContext;
 
-	public Game(IEnumerable<string> playerNames, IDevelopmentCardFactory developmentCardFactory)
+	public Game(IEnumerable<string> playerNames, IDevelopmentCardFactory developmentCardFactory, INobelFactory nobelFactory)
 	{
+		var players = InitPlayers(playerNames);
 		_boardContext = new()
 		{
-			Players = InitPlayers(playerNames.ToList()),
-			IsEnd = false,
+			Players = players,
+			Nobels = nobelFactory.CreateNobels(players.Count),
 			DevelopmentCards = developmentCardFactory.CreateCards(),
+			IsEnd = false,
 		};
 	}
-	
-	private List<Player> InitPlayers(List<string> playerNames)
+
+	private List<Player> InitPlayers(IEnumerable<string> playerNames)
+	{
+		ValidatePlayerNames(playerNames.ToList());
+		return playerNames.Select(name => new Player(name)).ToList();
+	}
+
+	private void ValidatePlayerNames(List<string> playerNames)
 	{
 		ArgumentNullException.ThrowIfNull(playerNames);
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(playerNames.Count, _maxPlayers);
 		ArgumentOutOfRangeException.ThrowIfLessThan(playerNames.Count, _minPlayers);
-
-		return playerNames.Select(name => new Player(name)).ToList();
+		//TODO what if a name will be a same???
 	}
 
 	public void Run()

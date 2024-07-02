@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Components.Nobels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core;
@@ -12,6 +8,7 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddSingleton<Random>();
 		services.AddTransient<IDevelopmentCardFactory, DevelopmentCardFactory>();
+		services.AddTransient<INobelFactory, NobelFactory>();
 		return services;
 	}
 }
