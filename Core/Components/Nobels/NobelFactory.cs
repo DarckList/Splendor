@@ -59,29 +59,8 @@ internal class NobelFactory : INobelFactory
 
 	private IEnumerable<TokenType> GetRandomCardTokenTypes()
 	{
-		var cardTokenTypes = GetCardTokenTypes();
-		Shuffle(cardTokenTypes.ToList());
+		var cardTokenTypes =  EnumHelper.GetCardTokenTypes();
+		_random.Shuffle<TokenType>(cardTokenTypes.ToArray());
 		return cardTokenTypes;
-	}
-
-	private void Shuffle<T>(IList<T> list)
-	{
-		int n = list.Count;
-		for (int i = n - 1; i > 0; i--)
-		{
-			int j = _random.Next(0, i + 1);
-			T temp = list[i];
-			list[i] = list[j];
-			list[j] = temp;
-		}
-	}
-
-	private IEnumerable<TokenType> GetCardTokenTypes()
-	{
-		foreach (TokenType tokenType in Enum.GetValues<TokenType>())
-		{
-			if (tokenType == TokenType.Gold) continue;
-			yield return tokenType;
-		}
 	}
 }

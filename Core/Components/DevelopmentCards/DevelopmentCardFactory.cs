@@ -38,19 +38,7 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
     {
         foreach (var cardCollection in _cards)
         {
-            Shuffle(cardCollection.Value);
-        }
-    }
-
-    private void Shuffle<T>(IList<T> list)
-    {
-        int n = list.Count;
-        for (int i = n - 1; i > 0; i--)
-        {
-            int j = _random.Next(0, i + 1);
-            T temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
+            _random.Shuffle<DevelopmentCard>(cardCollection.Value.ToArray());
         }
     }
 
@@ -78,7 +66,7 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
     {
         List<DevelopmentCard> developmentCards = new();
         Dictionary<TokenType, int> cost;
-        foreach (TokenType bonusToken in GetCardTokenTypes())
+        foreach (TokenType bonusToken in EnumHelper.GetCardTokenTypes())
         {
             int points = 1;
             // for one Token cost
@@ -150,7 +138,7 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
     private void SecondLevelCardGenerator()
     {
         List<DevelopmentCard> developmentCards = new();
-        foreach (TokenType bonusToken in GetCardTokenTypes())
+        foreach (TokenType bonusToken in EnumHelper.GetCardTokenTypes())
         {
             int points = 3;
             Dictionary<TokenType, int> cost = new()
@@ -206,7 +194,7 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
     {
         List<DevelopmentCard> developmentCards = new();
         Dictionary<TokenType, int> cost;
-        foreach (TokenType bonusToken in GetCardTokenTypes())
+        foreach (TokenType bonusToken in EnumHelper.GetCardTokenTypes())
         {
             int points = 3;
             cost = new()
@@ -261,15 +249,5 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
     {
         nextTokenType = initTokenType;
         return GetNextTokenType();
-    }
-
-
-    private IEnumerable<TokenType> GetCardTokenTypes()
-    {
-        foreach (TokenType tokenType in Enum.GetValues<TokenType>())
-        {
-            if (tokenType == TokenType.Gold) continue;
-            yield return tokenType;
-        }
     }
 }
