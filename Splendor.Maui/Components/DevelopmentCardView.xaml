@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Splendor.Maui.Components.DevelopmentCardView">
+    <Frame BorderColor="Black" CornerRadius="5" Padding="5" WidthRequest="100" HeightRequest="150">
+        <StackLayout>
+            <Label x:Name="CardPoints" FontSize="18" HorizontalOptions="Center" />
+            <Label x:Name="CardBonusToken" FontSize="14" HorizontalOptions="Center" />
+            <StackLayout x:Name="CardCost" Orientation="Vertical" HorizontalOptions="Center">
+                <!-- Costs will be added programmatically -->
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentView>

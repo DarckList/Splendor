@@ -60,8 +60,11 @@ public class DevelopmentCardFactory : IDevelopmentCardFactory
         foreach (DevelopmentCardlevel cardLevel in Enum.GetValues(typeof(DevelopmentCardlevel)))
         {
             _cards.Add(cardLevel, new List<DevelopmentCard>());
-        }
+            _cards.Add(cardLevel, new List<DevelopmentCard>());
+            _cards.Add(cardLevel, new List<DevelopmentCard>());
+
             GenerateCards();
+        }
     }
 
     private void GenerateCards()

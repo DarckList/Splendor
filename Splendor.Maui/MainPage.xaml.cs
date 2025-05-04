@@ -1,24 +1,28 @@
-﻿namespace Splendor.Maui;
+﻿using Core;
+using Core.Components.DevelopmentCards;
+using Core.Components.Nobels;
+using Core.Components.Tokens;
+using Splendor.Maui.Components;
+
+namespace Splendor.Maui;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
+    
 
-    public MainPage()
+    public MainPage(MainPageViewModel viewModel)
     {
         InitializeComponent();
-    }
 
-    private void OnCounterClicked(object sender, EventArgs e)
-    {
-        count++;
+        //BindingContext = viewModel;
+        var card = viewModel._factory?.CreateCards()[DevelopmentCardlevel.Third].First();
+        DevCardView.Card = card;
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
+        //// Example of adding gem tokens
+        //var blueToken = new TokenView { TokenText = "Blue" };
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        //// Add tokens to the board (assuming you have a layout to place them)
+        //GameBoard.Children.Add(blueToken);
     }
 }
 
